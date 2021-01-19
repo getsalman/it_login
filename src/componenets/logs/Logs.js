@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
+import LogsItem from "./LogsItem";
+import Preloader from "../layout/Preloader";
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
@@ -17,8 +19,9 @@ const Logs = () => {
   };
 
   if (loading) {
-    return <h4>Loading...</h4>;
+    return <Preloader />;
   }
+
   return (
     <Fragment>
       <ul className="collection with-header">
@@ -28,7 +31,7 @@ const Logs = () => {
         {!loading && logs.length === 0 ? (
           <p className="center">No logs to show...</p>
         ) : (
-          logs.map((log) => <li>{log.message}</li>)
+          logs.map((log) => <LogsItem log={log} key={log.id} />)
         )}
       </ul>
     </Fragment>
